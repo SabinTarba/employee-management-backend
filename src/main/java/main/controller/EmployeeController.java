@@ -9,7 +9,7 @@ import main.repository.EmployeeRepository;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://customer-management.netlify.app/")
+@CrossOrigin(origins = "https://employee-management-starba.netlify.app")
 @RestController
 @RequestMapping("api/v1/employees/")
 public class EmployeeController {
