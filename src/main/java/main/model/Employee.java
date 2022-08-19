@@ -1,5 +1,7 @@
 package main.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 
@@ -20,16 +22,28 @@ public class Employee {
     @Column(name="email_id")
     private String emailId;
 
+    @Column(name="salary")
+    private Double salary;
+
 
 
     public Employee(){
 
     }
-    public Employee(long id, String firstName, String lastName, String emailId) {
+    public Employee(long id, String firstName, String lastName, String emailId, Double salary) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
+        this.salary = salary;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
     }
 
     public long getId() {
