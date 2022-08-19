@@ -3,6 +3,7 @@ package main.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @Entity
@@ -25,17 +26,27 @@ public class Employee {
     @Column(name="salary")
     private Double salary;
 
+    @Column(name="hire_date")
+    private LocalDate hireDate;
 
+    public LocalDate getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
+    }
 
     public Employee(){
 
     }
-    public Employee(long id, String firstName, String lastName, String emailId, Double salary) {
+    public Employee(long id, String firstName, String lastName, String emailId, Double salary, LocalDate hireDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.salary = salary;
+        this.hireDate = hireDate;
     }
 
     public Double getSalary() {
