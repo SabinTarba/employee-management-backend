@@ -12,7 +12,7 @@ import main.repository.EmployeeRepository;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://employee-management-starba.netlify.app/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/v1/employees/")
 public class EmployeeController {
@@ -41,30 +41,22 @@ public class EmployeeController {
 
     @DeleteMapping("/deleteEmployee/{id}")
     public void deleteEmployee(@PathVariable long id){
-        Employee e = employeeRepository.findById(id).orElseThrow();
-
         employeeRepository.deleteById(id);
     }
 
     @GetMapping("/getEmployee/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable long id){
-        Employee e = employeeRepository.findById(id).orElseThrow();
+    public ResponseEntity<Optional<Employee>> getEmployeeById(@PathVariable long id){
+        Optional<Employee> e = employeeRepository.findById(id);
 
         return ResponseEntity.ok(e);
     }
 
 
     @PutMapping("/updateEmployee/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
-        Employee e = employeeRepository.findById(id).orElseThrow();
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeUpdated){
+        Optional<Employee> e = employeeRepository.findById(id);
 
-        e.setFirstName(employee.getFirstName());
-        e.setLastName(employee.getLastName());
-        e.setEmailId(employee.getEmailId());
-        e.setSalary(employee.getSalary());
-        e.setHireDate(employee.getHireDate());
-
-        Employee employeeUpdated = employeeRepository.save(e);
+        employeeRepository.save(employeeUpdated);
 
         return ResponseEntity.ok(employeeUpdated);
     }

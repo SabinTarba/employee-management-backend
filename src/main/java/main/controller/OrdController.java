@@ -37,8 +37,6 @@ public class OrdController {
 
     @DeleteMapping("deleteOrder/{id}")
     private void deleteOrder(@PathVariable Long id){
-        Ord ord = ordRepository.findById(id).orElseThrow();
-
         ordRepository.deleteById(id);
     }
 
