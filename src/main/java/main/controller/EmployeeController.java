@@ -1,13 +1,11 @@
 package main.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import main.model.Employee;
-import org.hibernate.FetchNotFoundException;
+import main.model.EmployeeInfo;
+import main.model.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import main.repository.EmployeeRepository;
+import main.repository.employee.EmployeeRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,5 +58,12 @@ public class EmployeeController {
 
         return ResponseEntity.ok(employeeUpdated);
     }
+
+    @GetMapping("/allInfoEmployees")
+    public List<EmployeeInfo> getAllInfoEmployees(){
+        return employeeRepository.getEmployeesInfo();
+    }
+
+
 
 }

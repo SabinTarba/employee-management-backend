@@ -1,4 +1,4 @@
-package main.model;
+package main.model.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,6 +27,9 @@ public class Employee {
     @Column(name="hire_date")
     private LocalDate hireDate;
 
+    @Column(name="function")
+    private String function;
+
     public LocalDate getHireDate() {
         return hireDate;
     }
@@ -38,13 +41,23 @@ public class Employee {
     public Employee(){
 
     }
-    public Employee(long id, String firstName, String lastName, String emailId, Double salary, LocalDate hireDate) {
+
+    public Employee(long id, String firstName, String lastName, String emailId, Double salary, LocalDate hireDate, String function) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.salary = salary;
         this.hireDate = hireDate;
+        this.function = function;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
     }
 
     public Double getSalary() {

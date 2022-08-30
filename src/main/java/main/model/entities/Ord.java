@@ -1,4 +1,4 @@
-package main.model;
+package main.model.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,15 +24,27 @@ public class Ord {
     @Column(name="status")
     private String status;
 
+    @Column(name = "origin")
+    private Long origin;
+
     public Ord(){
 
     }
 
-    public Ord(Long ord, String dt, Long employeeId, String status) {
+    public Ord(Long ord, LocalDate dt, Long employeeId, String status, Long origin) {
         this.ord = ord;
-        this.dt = LocalDate.parse(dt);
+        this.dt = dt;
         this.employeeId = employeeId;
         this.status = status;
+        this.origin = origin;
+    }
+
+    public Long getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Long origin) {
+        this.origin = origin;
     }
 
     public Long getOrd() {

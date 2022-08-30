@@ -1,17 +1,19 @@
 package main.controller;
 
 
-import main.model.Employee;
-import main.model.Ord;
-import main.model.OrdStatus;
-import main.repository.OrdRepository;
-import main.repository.OrdStatusRepository;
-import org.aspectj.weaver.ast.Or;
+import main.model.*;
+import main.model.entities.Ord;
+import main.model.entities.OrdStatus;
+import main.model.entities.OrderOriginSource;
+import main.repository.ord.OrdRepository;
+import main.repository.ord.OrdStatusRepository;
+import main.repository.ord.OrderSourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -23,6 +25,9 @@ public class OrdController {
 
     @Autowired
     private OrdStatusRepository ordStatusRepository;
+
+    @Autowired
+    private OrderSourceRepository orderSourceRepository;
 
 
     @GetMapping("allOrders")
@@ -42,7 +47,6 @@ public class OrdController {
 
     @PostMapping("createOrder")
     private String createOrder(@RequestBody Ord ord){
-        System.out.println(ord.getOrd());
         try{
             ordRepository.save(ord);
             return "{ \"Status\" : \"SUCCESS\" }";
@@ -51,4 +55,30 @@ public class OrdController {
             ex.printStackTrace();
             return "{ \"Status\" : \"FAIL \" }";
         }}
+
+
+    @PutMapping("/updateOrder/{id}")
+    public ResponseEntity<Ord> updateEmployee(@PathVariable Long id, @RequestBody Ord ord){
+        Optional<Ord> e = ordRepository.findById(id);
+
+        ordRepository.save(ord);
+
+        return ResponseEntity.ok(ord);
+    }
+
+    @GetMapping("/allInfoOrders")
+    public List<OrderInfo> getInfo(){
+        return ordRepository.getOrdersInfo();
+    }
+
+    @GetMapping("/allOrderSources")
+    public List<OrderOriginSource> getOrderSources(){
+        return orderSourceRepository.findAll();
+    }
+
+
+    @GetMapping("/processOrder/{ord}")
+    public void processOrder(@PathVariable Long ord){
+        ordRepository.processOrder(ord);
+    }
 }
