@@ -1,13 +1,11 @@
 package main.model;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
 
 @Entity
-@Table(name="employees")
+@Table(name="employees$")
 public class Employee {
 
     @Id
