@@ -10,7 +10,7 @@ import main.repository.employee.EmployeeRepository;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://employee-management-starba.netlify.app/")
 @RestController
 @RequestMapping("api/v1/employees/")
 public class EmployeeController {
