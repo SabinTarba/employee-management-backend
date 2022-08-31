@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://employee-management-starba.netlify.app/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/v1/orders/")
 public class OrdController {
@@ -48,8 +48,8 @@ public class OrdController {
     @PostMapping("createOrder")
     private String createOrder(@RequestBody Ord ord){
         try{
-            ordRepository.save(ord);
-            return "{ \"Status\" : \"SUCCESS\" }";
+            Ord ordCreated = ordRepository.save(ord);
+            return "{ \"lastOrd\" : " + ordCreated.getOrd() +" }";
         }
         catch(Exception ex) {
             ex.printStackTrace();
@@ -80,5 +80,16 @@ public class OrdController {
     @GetMapping("/processOrder/{ord}")
     public void processOrder(@PathVariable Long ord){
         ordRepository.processOrder(ord);
+    }
+
+    @GetMapping("/confirmOrder/{ord}")
+    public void confirmOrder(@PathVariable Long ord){
+        ordRepository.confirmOrder(ord);
+    }
+
+
+    @GetMapping("/lastOrd")
+    public OrdLastId getLastOrd(){
+        return ordRepository.getLastOrd();
     }
 }

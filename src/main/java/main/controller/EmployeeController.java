@@ -2,6 +2,8 @@ package main.controller;
 
 import main.model.EmployeeInfo;
 import main.model.entities.Employee;
+import main.model.entities.EmployeeFunction;
+import main.repository.employee.EmployeeFunctionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,13 +12,16 @@ import main.repository.employee.EmployeeRepository;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://employee-management-starba.netlify.app/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/v1/employees/")
 public class EmployeeController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private EmployeeFunctionRepository employeeFunctionRepository;
 
     //Get all employees REST API
     @GetMapping("/allEmployees")
@@ -64,6 +69,11 @@ public class EmployeeController {
         return employeeRepository.getEmployeesInfo();
     }
 
+
+    @GetMapping("/allFunctions")
+    public List<EmployeeFunction> getAllFunctions(){
+        return employeeFunctionRepository.findAll();
+    }
 
 
 }
