@@ -6,7 +6,7 @@ import main.repository.ord.OrdLnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://employee-management-starba.netlify.app/")
 @RestController
 @RequestMapping("api/v1/ordlines/")
 public class OrdLnController {
