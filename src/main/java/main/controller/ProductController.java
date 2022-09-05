@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@CrossOrigin(origins = "https://employee-management-starba.netlify.app/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/v1/products/")
 public class ProductController {
@@ -45,9 +46,11 @@ public class ProductController {
     @PutMapping("/updateProduct")
     public void updateProduct(@RequestBody Product prod){
 
-        Product p = productRepository.findById(prod.getId()).orElseThrow();
-        p.setQuantity(prod.getQuantity());
+        Optional<Product> p = productRepository.findById(prod.getId());
+        Product productSave = p.get();
 
-        productRepository.save(p);
+        productSave.setQuantity(prod.getQuantity());
+
+        productRepository.save(productSave);
     }
 }
