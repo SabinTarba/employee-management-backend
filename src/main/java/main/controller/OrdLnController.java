@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.*;
 <<<<<<< HEAD
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
-=======
+
 @CrossOrigin(origins = "https://employee-management-starba.netlify.app/")
->>>>>>> 8510d77aad80435afadc969a5f853df6592d3fd9
 @RestController
 @RequestMapping("api/v1/ordlines/")
 public class OrdLnController {
