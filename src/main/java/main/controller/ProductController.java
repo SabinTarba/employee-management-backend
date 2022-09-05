@@ -40,4 +40,14 @@ public class ProductController {
             return "{ \"Status\" : \"FAIL \" }";
         }
     }
+
+
+    @PutMapping("/updateProduct")
+    public void updateProduct(@RequestBody Product prod){
+
+        Product p = productRepository.findById(prod.getId()).orElseThrow();
+        p.setQuantity(prod.getQuantity());
+
+        productRepository.save(p);
+    }
 }

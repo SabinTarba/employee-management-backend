@@ -31,34 +31,34 @@ public class OrdController {
 
 
     @GetMapping("allOrders")
-    private List<Ord> getAllOrders(){
+    private List<Ord> getAllOrders() {
         return ordRepository.findAll();
     }
 
     @GetMapping("allStatus")
-    private List<OrdStatus> getAllStatus(){
+    private List<OrdStatus> getAllStatus() {
         return ordStatusRepository.findAll();
     }
 
     @DeleteMapping("deleteOrder/{id}")
-    private void deleteOrder(@PathVariable Long id){
+    private void deleteOrder(@PathVariable Long id) {
         ordRepository.deleteById(id);
     }
 
     @PostMapping("createOrder")
-    private String createOrder(@RequestBody Ord ord){
-        try{
+    private String createOrder(@RequestBody Ord ord) {
+        try {
             Ord ordCreated = ordRepository.save(ord);
-            return "{ \"lastOrd\" : " + ordCreated.getOrd() +" }";
-        }
-        catch(Exception ex) {
+            return "{ \"lastOrd\" : " + ordCreated.getOrd() + " }";
+        } catch (Exception ex) {
             ex.printStackTrace();
             return "{ \"Status\" : \"FAIL \" }";
-        }}
+        }
+    }
 
 
     @PutMapping("/updateOrder/{id}")
-    public ResponseEntity<Ord> updateEmployee(@PathVariable Long id, @RequestBody Ord ord){
+    public ResponseEntity<Ord> updateEmployee(@PathVariable Long id, @RequestBody Ord ord) {
         Optional<Ord> e = ordRepository.findById(id);
 
         ordRepository.save(ord);
@@ -67,29 +67,28 @@ public class OrdController {
     }
 
     @GetMapping("/allInfoOrders")
-    public List<OrderInfo> getInfo(){
+    public List<OrderInfo> getInfo() {
         return ordRepository.getOrdersInfo();
     }
 
     @GetMapping("/allOrderSources")
-    public List<OrderOriginSource> getOrderSources(){
+    public List<OrderOriginSource> getOrderSources() {
         return orderSourceRepository.findAll();
     }
 
 
     @GetMapping("/processOrder/{ord}")
-    public void processOrder(@PathVariable Long ord){
+    public void processOrder(@PathVariable Long ord) {
         ordRepository.processOrder(ord);
     }
 
     @GetMapping("/confirmOrder/{ord}")
-    public void confirmOrder(@PathVariable Long ord){
+    public void confirmOrder(@PathVariable Long ord) {
         ordRepository.confirmOrder(ord);
     }
 
-
-    @GetMapping("/lastOrd")
-    public OrdLastId getLastOrd(){
-        return ordRepository.getLastOrd();
+    @GetMapping("/orderPrice/{ord}")
+    public Float getOrderPrice(@PathVariable Long ord){
+        return ordRepository.getOrderPrice(ord);
     }
 }
