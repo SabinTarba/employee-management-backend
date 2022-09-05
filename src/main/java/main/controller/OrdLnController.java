@@ -7,8 +7,6 @@ import main.model.entities.OrdLn;
 import main.repository.ord.OrdLnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-<<<<<<< HEAD
 import java.util.List;
 
 
