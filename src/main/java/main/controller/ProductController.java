@@ -46,8 +46,10 @@ public class ProductController {
     @PutMapping("/updateProduct")
     public void updateProduct(@RequestBody Product prod){
 
+
         Optional<Product> p = productRepository.findById(prod.getId());
         Product productSave = p.get();
+
 
         productSave.setQuantity(prod.getQuantity());
 
